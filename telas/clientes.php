@@ -85,15 +85,15 @@
             <?php
                 // Banco de dados para seleionar os clientes
                 try {
-                    $banco = new PDO('mysql:host=localhost;dbname=db_exemplo;charset=utf8mb4', 'root', '');
+                    include '../../src/class/BancoDeDados.php'; 
+                    // Em caso de erro usar 'include_once'src/class/BancoDeDados.php';'
+                    $banco = new BancoDeDados;
                     $sql = 'SELECT * FROM clientes';
-                    $stmt = $banco->prepare($sql);
-                    $stmt->execute();
-                    $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $dados = $banco -> Consultar($sql,[],true); //Quando não tiver parametros, pode só definir o array vazio '[]'
 
                     // Verificando se a variável $dados possui valor
                     if ($dados) {
-                        // Imprimindo os dados na tabela
+                        // Imprimindo os dados na tabela    
                         foreach ($dados as $linha) {
                             echo "<tr>
                                 <td>{$linha['id_cliente']}</td>

@@ -110,13 +110,11 @@
         if (isset($_GET['idCliente'])) {
             $id_cliente = $_GET['idCliente'];
             try {
-                $banco = new PDO('mysql:host=localhost;dbname=db_exemplo;charset=utf8mb4', 'root', '');
+                include 'src/class/BancoDeDados.php';  
+                $banco = new BancoDeDados;
                 $sql = 'SELECT * FROM clientes WHERE id_cliente = ?';
                 $parametros = [ $id_cliente ];
-                $stmt = $banco->prepare($sql);
-                $stmt->execute($parametros);
-                $dados = $stmt->fetch(PDO::FETCH_ASSOC);
-                
+                $dados = $banco -> Consultar($sql,$parametros);
                 // Se houver dados dentro da variável $dados, 
                 // imprime um script javascript para passar esses valores para o formulário
                 if ($dados) {

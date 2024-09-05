@@ -17,7 +17,8 @@
     
     // Banco de dados para cadastrar o cliente
     try {
-        $banco = new PDO('mysql:host=localhost;dbname=db_exemplo;charset=utf8mb4', 'root', '');
+        include 'class/BancoDeDados.php';
+        $banco = new BancoDeDados;
 
         //Verificar se o sistema deve inserir ou atualizar cliente
         if($formulario['id'] == 'NOVO')
@@ -43,8 +44,7 @@
             ]; 
             $msg_sucesso = 'Dados alterados com sucesso!';
         }
-        $stmt = $banco->prepare($sql);
-        $stmt->execute($parametros);
+        $banco -> ExecutarComando($sql, $parametros);
 
         // Msg de sucesso
         echo "<script>
