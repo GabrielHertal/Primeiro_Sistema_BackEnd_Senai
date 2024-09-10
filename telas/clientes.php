@@ -57,7 +57,6 @@
                 <option value="TO">TO</option>
             </select>
         </div>
-    
         <div class="col-sm-6">
             <button class="w-100 btn btn-secondary btn-lg" type="reset">Cancelar</button>
         </div>
