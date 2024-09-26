@@ -1,12 +1,10 @@
 <?php
     // Validação
-    $usuario = isset($_POST['txt_usuario']) ? $_POST['txt_usuario'] : '';
-    $senha = isset($_POST['txt_senha']) ? $_POST['txt_senha'] : '';
-    if (empty($usuario) || empty($senha)) {
-        echo "<script>
-            alert('Por favor preencha todos os campos!');
-            window.location = '../index.php';
-        </script>";
+    $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : '';
+    $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
+    if (empty($usuario) || empty($senha)) 
+    {
+        echo "Por favor preencha todos os campos!";
         exit;
     }
 
@@ -33,24 +31,14 @@
             $_SESSION['id_usuario'] = $dados_usuario['id_usuario'];
             $_SESSION['nome_usuario'] = $dados_usuario['nome'];
 
-            // Cookies
-            // ...
-
             // Redirecionar
             header('LOCATION: ../sistema.php');
         } else {
-            echo "<script>
-                alert('Usuário ou senha incorretos! Verifique.');
-                window.location = '../index.php';
-            </script>";
+            echo "Usuário ou senha incorretos! Verifique!";
         }
     }
     catch(PDOException $erro)
     {
         $msg = $erro->getMessage();
-        echo 
-            "<script>
-                alert(\"$msg\");
-                window.location = '../index.php';
-            </script>";
+        echo 'Houve uma exceção no banco de dados: ' . $msg;
     }
